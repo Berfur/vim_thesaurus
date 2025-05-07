@@ -2,10 +2,10 @@
 
 ## Contenuti
 1. [Perché](#perche)
-2. Prerequisiti
-3. Installazione e configurazione
-4
-. [Da fare](#todo)
+2. [Prerequisiti](#prereq)
+3. [Installazione e configurazione](#install)
+3. [Utilizzo](#use)
+4. [Da fare](#todo)
 
 <a name="perche"></a>
 ## Perché
@@ -46,6 +46,20 @@ Il file vim (.vim) va in ~/.vim/plugin/
 Per configurarlo invece dovete verificare che i percorsi inseriti all'interno siano corretti. Sono comunque entrambi definiti come variabili all'inizio dello script. I percorsi da modificare sono 2:
 1. nello script bash il percorso che punta al dizionario dei sinonimi di mythes che dovrebbe essere /usr/share/mythes/file.dat
 2. uno nel file vim che punta allo script bash
+
+<a name="use"></a>
+## Utilizzo
+
+Ci sono due script, quello che fa il lavoro di ricerca è quello bash. L'utlizzo è molto semplice:
+
+```
+> ./sinonimi.sh <termine di ricerca>
+```
+
+Se nessun termine viene trovato riporta come output:
+
+Altrimenti ti offre una lista di termini uno sotto l'altro
+
 
 <a name="todo"></a>
 ## Todo
