@@ -25,7 +25,7 @@ Invece di utilizzare mythes, ho preferito creare uno script che fa più o meno l
 
 Alla fine quello che viene fuori è:
 
-[Menu contestuale per termini in vim](./Sin-1.png "Un esempio di menu contestuale in vim per i sinonimi").
+![Menu contestuale per termini in vim](./Sin-1.png)
 
 
 <a name="prereq"></a>
