@@ -1,16 +1,20 @@
 "
 " This scripts offers a popup menu with synonyms for the word under the cursor.
+" It works like a frontend to other scripts working to search for the synonims/contraries
 " Dependencies:
 " * a version of vim who supports popup menu
 " * another script bash to do the search
 "   - the bash script needs a hunspell/myspell file with the synonims
 "
 
+" let's check if we have popups available
 if !has('popupwin')
   echoerr "Il tuo Vim non supporta i popup (manca +popupwin)."
   finish
 endif
 
+" choose your backend
+" todo: make it parametric?
 let g:sinonimi_script_path = expand('~/.local/bin/sinonimi.sh')
 
 function! CercaSinonimi() abort
@@ -26,8 +30,8 @@ function! CercaSinonimi() abort
  " Esegui lo script e ottieni i sinonimi (lo script bash ritorna sempre un valore, vedi sotto)
   let g:sinonimi = systemlist(script . ' ' . shellescape(parola))
 
-  " sinonimi.sh convert all words to lowercase
-  " Controlla se la risposta è quella che indica che non sono stati trovati sinonimi
+  " the backend will convert all searched words to lowercase
+  " Here we raise an alarm if we cannot find the word
   if g:sinonimi == ['Voce "'.tolower(parola).'" non trovata.']
     call popup_create(['Sinonimi non trovati per: ' . parola], #{
       \ title: 'Avviso',
@@ -38,7 +42,10 @@ function! CercaSinonimi() abort
       \ })
     return
   endif
+  " here we raise an alarm in case the backend return an error
+  " Todo: create a fallback message in case the backend return an error
 
+  " The function to substitute the word under the cursor with the one selected from the popup menu
   function! SinSelected(id, result) abort
 	  if a:result == -1
 		  return
