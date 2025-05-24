@@ -1,11 +1,19 @@
 #!/bin/bash
+#
+# sinonimi.sh
+# Versione 1.0
+#
+# Script per interrogare il dizionario di Mythes/Hunspell per avere i sinonimi
+#
+#
+#
 
 # Percorso al file del dizionario MyThes
 DIZ="/usr/share/mythes/th_it_IT_v2.dat"
 
 # Verifica che il file esista
 if [ ! -f "$DIZ" ]; then
-    echo "Dizionario non trovato in $DIZ"
+    echo "Errore: Dizionario non trovato in $DIZ"
     exit 1
 fi
 
@@ -16,7 +24,7 @@ PAROLA=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 START=$(grep -n "^$PAROLA|" "$DIZ" | cut -d: -f1)
 
 if [ -z "$START" ]; then
-    echo "Voce \"$PAROLA\" non trovata."
+    echo "Errore: Voce \"$PAROLA\" non trovata."
     exit 1
 fi
 
@@ -43,5 +51,5 @@ if [ "${#SINONIMI[@]}" > 0 ]; then
 #    echo "Sinonimi totali: ${#SINONIMI[@]}"
     printf '%s\n' "${SINONIMI[@]}"
 else
-    echo "Sinonimi non trovati"
+    echo "Errore: Sinonimi non trovati"
 fi
